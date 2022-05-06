@@ -118,5 +118,4 @@ def random_graph(size, density):
         g.add_edge(v2, v3)
         g.add_edge(v3, v1)
 
-    g.print_matrix()
-    print(g.get_density())
+    return g
