@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -79,35 +80,48 @@ class Graph():
 
 def random_graph(size, density):
     g = Graph(size)
+    print(f'Generating graph {size}')
 
     v1 = g.random_vertex()
     v2 = g.random_vertex()
     while v1 == v2:
         v2 = g.random_vertex()
     g.add_edge(v1, v2)
+    # print('First pair OK')
 
     while g.check_if_all_connected() == False:
+        # print('Disconnected')
         v1 = g.random_connected_vertex()
         v2 = g.random_disconnected_vertex()
         g.add_edge(v1, v2)
+        # print(f'Added edge from {v1} to {v2}')
 
-    while len(g.get_uneven()) != 0:
-        uneven = g.get_uneven()
-        if len(uneven) == 3:
-            v1 = uneven[0]
-            v2 = uneven[1]
-            v3 = uneven[2]
-            g.add_edge(v1, v2)
-            g.add_edge(v2, v3)
-            g.add_edge(v3, v1)
-        else:
-            v1 = g.random_uneven_vertex()
-            v2 = g.random_uneven_vertex()
-            if v1 == v2:
-                continue
-            g.add_edge(v1, v2)
+    # print('All vertex are connected')
 
-    while g.get_density() < density:
+    # while len(g.get_uneven()) != 0:
+    #     uneven = g.get_uneven()
+    #     # print(f'{len(uneven)} uneven vertex')
+    #     if len(uneven) == 3:
+    #         v1 = uneven[0]
+    #         v2 = uneven[1]
+    #         v3 = uneven[2]
+    #         g.add_edge(v1, v2)
+    #         g.add_edge(v2, v3)
+    #         g.add_edge(v3, v1)
+    #     else:
+    #         v1 = g.random_uneven_vertex()
+    #         v2 = g.random_uneven_vertex()
+    #         if v1 == v2:
+    #             continue
+    #         if g.adjMatrix[v1][v2] == 1:
+    #             # print(
+    #             #     'Last uneven vertexs already connected - Generating new graph'
+    #             # )
+    #             return random_graph(size, density)
+
+    #         g.add_edge(v1, v2)
+
+    while round(g.get_density(), 1) <= density:
         v1 = g.random_vertex()
         v2 = g.random_vertex()
         v3 = g.random_vertex()

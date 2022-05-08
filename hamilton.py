@@ -1,7 +1,7 @@
 class Hamilton():
 
     def __init__(self, graph, once):
-        self.graph = graph.adjMatrix
+        self.graph = graph
         self.has_cycle = False
         self.once = once
 
@@ -16,8 +16,6 @@ class Hamilton():
         return True
 
     def ham_cycle(self):
-        self.has_cycle = False
-
         path = []
         path.append(0)
 
@@ -27,31 +25,36 @@ class Hamilton():
 
         self.find_ham_cycle(1, path, visited)
 
-        if self.has_cycle:
+        if self.has_cycle is False:
             print("No Hamiltonian Cycle possible")
-            return
+            return False
 
     def find_ham_cycle(self, pos, path, visited):
-
         if pos == len(self.graph):
 
             if self.graph[path[-1]][path[0]] != 0:
                 path.append(0)
-                for i in range(len(path)):
-                    print(path[i], end=" ")
-                print()
-                if (self.once):
-                    return
+                print(f'Hamiltonian: {path}')
                 path.pop()
                 self.has_cycle = True
             return
 
-        for v in range(len(self.graph)):
+        if self.once == True:
+            if self.has_cycle == False:
+                for v in range(len(self.graph)):
 
-            if self.is_safe(v, path, pos) and not visited[v]:
-                path.append(v)
-                visited[v] = True
+                    if self.is_safe(v, path, pos) and not visited[v]:
+                        path.append(v)
+                        visited[v] = True
+                        self.find_ham_cycle(pos + 1, path, visited)
+                        visited[v] = False
+                        path.pop()
+        else:
+            for v in range(len(self.graph)):
 
-                self.find_ham_cycle(pos + 1, path, visited)
-                visited[v] = False
-                path.pop()
+                if self.is_safe(v, path, pos) and not visited[v]:
+                    path.append(v)
+                    visited[v] = True
+                    self.find_ham_cycle(pos + 1, path, visited)
+                    visited[v] = False
+                    path.pop()

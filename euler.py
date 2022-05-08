@@ -15,4 +15,5 @@ def euler(g):
             neighbour = g.adjMatrix[current].index(1)
             g.remove_edge(current, neighbour)
             current = neighbour
-    print(circuit)
+    # print(f'Euler: {circuit}')
+    return circuit
