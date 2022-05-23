@@ -1,7 +1,8 @@
 def euler(g):
     stack = []
     circuit = []
-    current = g.random_vertex()
+    # current = g.random_vertex()
+    current = 0
     stack.append(current)
     neighbour = g.adjMatrix[current].index(1)
     g.remove_edge(current, neighbour)
@@ -15,5 +16,6 @@ def euler(g):
             neighbour = g.adjMatrix[current].index(1)
             g.remove_edge(current, neighbour)
             current = neighbour
-    # print(f'Euler: {circuit}')
+    circuit.append(circuit[0])
+    print(f'Euler: {circuit}')
     return circuit

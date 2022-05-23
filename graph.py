@@ -11,6 +11,9 @@ class Graph():
             self.size = size
             self.edges = 0
 
+    def set_adj_matrix(self, adjM):
+        self.adjMatrix = adjM
+
     def add_edge(self, v1, v2):
         # if v1 == v2:
         #     print(f'Same vertex {v1} and {v2}')
@@ -26,6 +29,7 @@ class Graph():
             return
         self.adjMatrix[v1][v2] = 0
         self.adjMatrix[v2][v1] = 0
+        self.edges -= 1
 
     def __len__(self):
         return self.size
