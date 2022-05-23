@@ -17,5 +17,8 @@ def euler(g):
             g.remove_edge(current, neighbour)
             current = neighbour
     circuit.append(circuit[0])
-    print(f'Euler: {circuit}')
-    return circuit
+    eul = []
+    for i in circuit:
+        eul.append(i + 1)
+    print(f'Euler: {eul}')
+    return eul

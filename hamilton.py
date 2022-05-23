@@ -34,7 +34,10 @@ class Hamilton():
 
             if self.graph[path[-1]][path[0]] != 0:
                 path.append(0)
-                print(f'Hamiltonian: {path}')
+                ham = []
+                for i in path:
+                    ham.append(i + 1)
+                print(f'Hamiltonian: {ham}')
                 path.pop()
                 self.has_cycle = True
             return
